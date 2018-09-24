@@ -17,6 +17,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.io.FilterReader;
 import java.io.IOException;
@@ -51,7 +52,7 @@ public abstract class ProxyReader extends FilterReader {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=65535) int read() throws IOException {
         try {
             beforeRead(1);
             final int c = in.read();

@@ -20,6 +20,8 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+import org.checkerframework.common.value.qual.UnknownVal;
+
 /**
  * A Proxy stream which acts as expected, that is it passes the method 
  * calls on to the proxied stream and doesn't change which methods are 
@@ -49,7 +51,7 @@ public class ProxyWriter extends FilterWriter {
      * @since 2.0
      */
     @Override
-    public Writer append(final char c) throws IOException {
+    public Writer append(final @UnknownVal char c) throws IOException {
         try {
             beforeWrite(1);
             out.append(c);

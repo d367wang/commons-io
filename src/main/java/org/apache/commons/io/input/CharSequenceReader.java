@@ -17,6 +17,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.io.Reader;
 import java.io.Serializable;
@@ -81,7 +82,7 @@ public class CharSequenceReader extends Reader implements Serializable {
      * or -1 if the end has been reached.
      */
     @Override
-    public int read() {
+    public @IntRange(from=-1, to=65535) int read() {
         if (idx >= charSequence.length()) {
             return EOF;
         } else {

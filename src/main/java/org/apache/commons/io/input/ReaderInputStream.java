@@ -17,6 +17,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -273,7 +274,7 @@ public class ReaderInputStream extends InputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         for (;;) {
             if (encoderOut.hasRemaining()) {
                 return encoderOut.get() & 0xFF;

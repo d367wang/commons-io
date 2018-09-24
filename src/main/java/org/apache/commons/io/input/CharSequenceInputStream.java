@@ -18,6 +18,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -161,7 +162,7 @@ public class CharSequenceInputStream extends InputStream {
     }
 
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         for (;;) {
             if (this.bbuf.hasRemaining()) {
                 return this.bbuf.get() & 0xFF;

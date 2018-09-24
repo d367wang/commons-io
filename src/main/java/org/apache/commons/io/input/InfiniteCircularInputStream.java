@@ -18,6 +18,8 @@ package org.apache.commons.io.input;
 
 import java.io.InputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * 
  * An {@link InputStream} that infinitely repeats provided bytes.
@@ -43,7 +45,7 @@ public class InfiniteCircularInputStream extends InputStream {
     }
 
     @Override
-    public int read() {
+    public @IntRange(from=-1, to=255) int read() {
         position = (position + 1) % repeatedContent.length;
         return repeatedContent[position] & 0xff; // copied from
                                                  // java.io.ByteArrayInputStream.read()

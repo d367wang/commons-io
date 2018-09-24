@@ -18,6 +18,8 @@ package org.apache.commons.io.output;
 
 import java.io.Writer;
 
+import org.checkerframework.common.value.qual.UnknownVal;
+
 /**
  * This {@link Writer} writes all data to the famous <b>/dev/null</b>.
  * <p>
@@ -45,7 +47,7 @@ public class NullWriter extends Writer {
      * @since 2.0
      */
     @Override
-    public Writer append(final char c) {
+    public Writer append(final @UnknownVal char c) {
         //to /dev/null
         return this;
     }

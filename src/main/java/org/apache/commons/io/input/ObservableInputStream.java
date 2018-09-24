@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * The {@link ObservableInputStream} allows, that an InputStream may be consumed
@@ -111,7 +112,7 @@ public class ObservableInputStream extends ProxyInputStream {
     }
 
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         int result = 0;
         IOException ioe = null;
         try {

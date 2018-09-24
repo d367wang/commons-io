@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * Utility code for dealing with different endian systems.
  * <p>
@@ -53,7 +55,7 @@ public class EndianUtils {
      * @param value value to convert
      * @return the converted value
      */
-    public static short swapShort(final short value) {
+    public static @IntRange(from=0, to=65535) short swapShort(final short value) {
         return (short) ( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
             ( ( ( value >> 8 ) & 0xff ) << 0 ) );
     }

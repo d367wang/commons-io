@@ -21,6 +21,8 @@ package org.apache.commons.io.input;
 import java.io.IOException;
 import java.io.Reader;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * A reader that imposes a limit to the number of characters that can be read from
  * an underlying reader, returning eof when this limit is reached -regardless of state of
@@ -114,7 +116,7 @@ public class BoundedReader
      * @see java.io.Reader#read()
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=65535) int read() throws IOException {
 
         if ( charsRead >= maxCharsFromTargetReader ) {
             return -1;
