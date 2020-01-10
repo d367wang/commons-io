@@ -17,6 +17,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntVal;
 
 import java.io.InputStream;
 
@@ -43,7 +44,7 @@ public class ClosedInputStream extends InputStream {
      * @return always -1
      */
     @Override
-    public int read() {
+    public @IntVal(-1) int read() {
         return EOF;
     }
 

@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.Serializable;
 import java.io.Writer;
 
+import org.checkerframework.common.value.qual.UnknownVal;
+
 /**
  * {@link Writer} implementation that outputs to a {@link StringBuilder}.
  * <p>
@@ -69,7 +71,7 @@ public class StringBuilderWriter extends Writer implements Serializable {
      * @return This writer instance
      */
     @Override
-    public Writer append(final char value) {
+    public Writer append(final @UnknownVal char value) {
         builder.append(value);
         return this;
     }

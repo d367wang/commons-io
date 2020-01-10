@@ -16,9 +16,11 @@
  */
 package org.apache.commons.io.input;
 
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.common.value.qual.IntVal;
 
 /**
  * A filtering input stream that ensures the content will have unix-style line endings, LF.
@@ -53,7 +55,7 @@ public class UnixLineEndingInputStream extends InputStream {
      * @return the next int read from the target stream
      * @throws IOException upon error
      */
-    private int readWithUpdate() throws IOException {
+    private @IntRange(from=-1, to=255) int readWithUpdate() throws IOException {
         final int target = this.target.read();
         eofSeen = target == -1;
         if ( eofSeen ) {
@@ -68,7 +70,7 @@ public class UnixLineEndingInputStream extends InputStream {
      * {@inheritDoc}
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         boolean previousWasSlashR = slashRSeen;
         if ( eofSeen ) {
             return eofGame(previousWasSlashR);
@@ -96,7 +98,7 @@ public class UnixLineEndingInputStream extends InputStream {
      * @param previousWasSlashR Indicates if the last seen was a \r
      * @return The next char to output to the stream
      */
-    private int eofGame(boolean previousWasSlashR) {
+    private @IntVal({-1, 10}) int eofGame(boolean previousWasSlashR) {
         if ( previousWasSlashR || !ensureLineFeedAtEndOfFile ) {
             return -1;
         }

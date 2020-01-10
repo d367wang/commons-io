@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.io.ByteOrderMark;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * This class is used to wrap a stream that includes an encoded {@link ByteOrderMark} as its first bytes.
@@ -94,7 +95,7 @@ public class BOMInputStream extends ProxyInputStream {
      */
     private final List<ByteOrderMark> boms;
     private ByteOrderMark byteOrderMark;
-    private int[] firstBytes;
+    private @IntRange(from=-1, to=255) int[] firstBytes;
     private int fbLength;
     private int fbIndex;
     private int markFbIndex;
@@ -263,7 +264,7 @@ public class BOMInputStream extends ProxyInputStream {
      * @throws IOException
      *             if an I/O error occurs
      */
-    private int readFirstBytes() throws IOException {
+    private @IntRange(from=-1, to=255) int readFirstBytes() throws IOException {
         getBOM();
         return fbIndex < fbLength ? firstBytes[fbIndex++] : EOF;
     }
@@ -314,7 +315,7 @@ public class BOMInputStream extends ProxyInputStream {
      *             if an I/O error occurs
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         final int b = readFirstBytes();
         return b >= 0 ? b : in.read();
     }

@@ -19,6 +19,8 @@ package org.apache.commons.io.input;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.checkerframework.common.value.qual.BottomVal;
+
 /**
  * Broken input stream. This stream always throws an {@link IOException} from
  * all the {@link InputStream} methods where the exception is declared.
@@ -58,7 +60,7 @@ public class BrokenInputStream extends InputStream {
      * @throws IOException always thrown
      */
     @Override
-    public int read() throws IOException {
+    public @BottomVal int read() throws IOException {
         throw exception;
     }
 

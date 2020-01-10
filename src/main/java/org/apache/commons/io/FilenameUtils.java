@@ -656,7 +656,7 @@ public class FilenameUtils {
                 }
                 posUnix = posUnix == NOT_FOUND ? posWin : posUnix;
                 posWin = posWin == NOT_FOUND ? posUnix : posWin;
-                return Math.min(posUnix, posWin) + 1;
+                return Math.min(  posUnix, posWin) + 1;
             }
             final char ch1 = filename.charAt(1);
             if (ch1 == ':') {

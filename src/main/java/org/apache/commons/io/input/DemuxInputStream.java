@@ -17,6 +17,7 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +68,7 @@ public class DemuxInputStream
      * @throws IOException if an error occurs
      */
     @Override
-    public int read()
+    public @IntRange(from=-1, to=255) int read()
         throws IOException
     {
         final InputStream input = m_streams.get();

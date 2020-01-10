@@ -50,6 +50,8 @@ import java.util.List;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.io.output.StringBuilderWriter;
 
+import org.checkerframework.checker.index.qual.NonNegative;
+
 /**
  * General IO stream manipulation utilities.
  * <p>
@@ -784,7 +786,7 @@ public class IOUtils {
      * @see IOUtils#toByteArray(java.io.InputStream, int)
      * @since 2.1
      */
-    public static byte[] toByteArray(final InputStream input, final long size) throws IOException {
+    public static byte[] toByteArray(final InputStream input, @NonNegative final long size) throws IOException {
 
         if (size > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("Size cannot be greater than Integer max value: " + size);
@@ -2243,7 +2245,7 @@ public class IOUtils {
      * @since 1.1
      */
     public static int copy(final InputStream input, final OutputStream output) throws IOException {
-        final long count = copyLarge(input, output);
+    	@NonNegative final long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
             return -1;
         }
@@ -2490,7 +2492,7 @@ public class IOUtils {
      * @since 1.1
      */
     public static int copy(final Reader input, final Writer output) throws IOException {
-        final long count = copyLarge(input, output);
+    	@NonNegative final long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
             return -1;
         }

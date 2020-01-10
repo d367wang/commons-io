@@ -17,6 +17,8 @@
 package org.apache.commons.io.input;
 
 import static org.apache.commons.io.IOUtils.EOF;
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.common.value.qual.IntVal;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -184,7 +186,7 @@ public class NullInputStream extends InputStream {
      * @throws IOException if trying to read past the end of file.
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         if (eof) {
             throw new IOException("Read after end of file");
         }
@@ -302,7 +304,7 @@ public class NullInputStream extends InputStream {
      *
      * @return This implementation always returns zero.
      */
-    protected int processByte() {
+    protected @IntVal(0) int processByte() {
         // do nothing - overridable by subclass
         return 0;
     }
@@ -329,7 +331,7 @@ public class NullInputStream extends InputStream {
      * @throws EOFException if <code>throwEofException</code> is set
      * to {@code true}.
      */
-    private int doEndOfFile() throws EOFException {
+    private @IntVal(-1) int doEndOfFile() throws EOFException {
         eof = true;
         if (throwEofException) {
             throw new EOFException();

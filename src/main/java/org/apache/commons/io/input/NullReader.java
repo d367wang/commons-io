@@ -22,6 +22,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.Reader;
 
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.common.value.qual.IntVal;
+
 /**
  * A functional, light weight {@link Reader} that emulates
  * a reader of a specified size.
@@ -167,7 +170,7 @@ public class NullReader extends Reader {
      * @throws IOException if trying to read past the end of file.
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=65535) int read() throws IOException {
         if (eof) {
             throw new IOException("Read after end of file");
         }
@@ -285,7 +288,7 @@ public class NullReader extends Reader {
      *
      * @return This implementation always returns zero.
      */
-    protected int processChar() {
+    protected @IntVal(0) int processChar() {
         // do nothing - overridable by subclass
         return 0;
     }
@@ -312,7 +315,7 @@ public class NullReader extends Reader {
      * @throws EOFException if <code>throwEofException</code> is set
      * to {@code true}.
      */
-    private int doEndOfFile() throws EOFException {
+    private @IntVal(-1) int doEndOfFile() throws EOFException {
         eof = true;
         if (throwEofException) {
             throw new EOFException();

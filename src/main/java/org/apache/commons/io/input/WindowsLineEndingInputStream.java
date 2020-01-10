@@ -19,6 +19,9 @@ package org.apache.commons.io.input;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.common.value.qual.IntVal;
+
 /**
  * A filtering input stream that ensures the content will have windows line endings, CRLF.
  *
@@ -54,7 +57,7 @@ public class WindowsLineEndingInputStream  extends InputStream {
      * @return the next int read from the target stream
      * @throws IOException upon error
      */
-    private int readWithUpdate() throws IOException {
+    private @IntRange(from=-1, to=255) int readWithUpdate() throws IOException {
         final int target = this.target.read();
         eofSeen = target == -1;
         if ( eofSeen ) {
@@ -69,7 +72,7 @@ public class WindowsLineEndingInputStream  extends InputStream {
      * {@inheritDoc}
      */
     @Override
-    public int read() throws IOException {
+    public @IntRange(from=-1, to=255) int read() throws IOException {
         if ( eofSeen ) {
             return eofGame();
         } else if ( injectSlashN ) {
@@ -97,7 +100,7 @@ public class WindowsLineEndingInputStream  extends InputStream {
      * @return The next char to output to the stream
      */
 
-    private int eofGame() {
+    private @IntVal({-1, 10, 13}) int eofGame() {
         if ( !ensureLineFeedAtEndOfFile ) {
             return -1;
         }
