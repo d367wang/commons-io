@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.checkerframework.common.value.qual.IntRange;
+import cast.SignednessConvert;
 
 /**
  * This class is used to wrap a stream that includes an encoded {@link ByteOrderMark} as its first bytes.
@@ -95,7 +96,7 @@ public class BOMInputStream extends ProxyInputStream {
      */
     private final List<ByteOrderMark> boms;
     private ByteOrderMark byteOrderMark;
-    private @IntRange(from=0, to=255) int[] firstBytes;
+    private @IntRange(from=-1, to=255) int[] firstBytes;
     private int fbLength;
     private int fbIndex;
     private int markFbIndex;
@@ -340,7 +341,7 @@ public class BOMInputStream extends ProxyInputStream {
         while (len > 0 && b >= 0) {
             b = readFirstBytes();
             if (b >= 0) {
-                buf[off++] = (byte) (b & 0xFF);
+                buf[off++] = SignednessConvert.toSignedByte(b & 0xFF);
                 len--;
                 firstCount++;
             }

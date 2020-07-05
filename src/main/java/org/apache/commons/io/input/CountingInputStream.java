@@ -34,7 +34,7 @@ import org.checkerframework.common.value.qual.IntRange;
 public class CountingInputStream extends ProxyInputStream {
 
     /** The count of bytes that have passed. */
-    private long count;
+    private @IntRange(from=0) long count;
 
     /**
      * Constructs a new CountingInputStream.
@@ -123,7 +123,7 @@ public class CountingInputStream extends ProxyInputStream {
      * @return the number of bytes accumulated
      * @since 1.3
      */
-    public synchronized long getByteCount() {
+    public synchronized @IntRange(from=0) long getByteCount() {
         return this.count;
     }
 
@@ -137,7 +137,7 @@ public class CountingInputStream extends ProxyInputStream {
      * @return the count previous to resetting
      * @since 1.3
      */
-    public synchronized long resetByteCount() {
+    public synchronized @IntRange(from=0) long resetByteCount() {
         final long tmp = this.count;
         this.count = 0;
         return tmp;

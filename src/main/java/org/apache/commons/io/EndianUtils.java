@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.checkerframework.common.value.qual.IntRange;
+import cast.SignednessConvert;
 
 /**
  * Utility code for dealing with different endian systems.
@@ -56,7 +57,7 @@ public class EndianUtils {
      * @return the converted value
      */
     public static short swapShort(final short value) {
-        return (short) ( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
+        return SignednessConvert.toSignedShort( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
             ( ( ( value >> 8 ) & 0xff ) << 0 ) );
     }
 
@@ -130,7 +131,7 @@ public class EndianUtils {
      * @return the value read
      */
     public static short readSwappedShort(final byte[] data, final int offset) {
-        return (short)( ( ( data[ offset + 0 ] & 0xff ) << 0 ) +
+        return SignednessConvert.toSignedShort( ( ( data[ offset + 0 ] & 0xff ) << 0 ) +
             ( ( data[ offset + 1 ] & 0xff ) << 8 ) );
     }
 
@@ -168,7 +169,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @return the value read
      */
-    public static int readSwappedInteger(final byte[] data, final int offset) {
+    public static int readSwappedInteger(final @IntRange(from=0, to=255) byte[] data, final int offset) {
         return ( ( ( data[ offset + 0 ] & 0xff ) << 0 ) +
             ( ( data[ offset + 1 ] & 0xff ) << 8 ) +
             ( ( data[ offset + 2 ] & 0xff ) << 16 ) +
@@ -218,7 +219,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @return the value read
      */
-    public static long readSwappedLong(final byte[] data, final int offset) {
+    public static long readSwappedLong(final @IntRange(from=0, to=255) byte[] data, final int offset) {
         final long low = readSwappedInteger(data, offset);
         final long high = readSwappedInteger(data, offset + 4);
         return (high << 32) + (0xffffffffL & low);
@@ -242,7 +243,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @return the value read
      */
-    public static float readSwappedFloat(final byte[] data, final int offset) {
+    public static float readSwappedFloat(final @IntRange(from=0, to=255) byte[] data, final int offset) {
         return Float.intBitsToFloat( readSwappedInteger( data, offset ) );
     }
 
@@ -253,7 +254,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @param value value to write
      */
-    public static void writeSwappedDouble(final byte[] data, final int offset, final double value) {
+    public static void writeSwappedDouble(final @IntRange(from=0, to=255) byte[] data, final int offset, final double value) {
         writeSwappedLong( data, offset, Double.doubleToLongBits( value ) );
     }
 
@@ -264,7 +265,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @return the value read
      */
-    public static double readSwappedDouble(final byte[] data, final int offset) {
+    public static double readSwappedDouble(final @IntRange(from=0, to=255) byte[] data, final int offset) {
         return Double.longBitsToDouble( readSwappedLong( data, offset ) );
     }
 
@@ -292,7 +293,7 @@ public class EndianUtils {
     public static short readSwappedShort(final InputStream input)
         throws IOException
     {
-        return (short)( ( ( read( input ) & 0xff ) << 0 ) +
+        return SignednessConvert.toSignedShort( ( ( read( input ) & 0xff ) << 0 ) +
             ( ( read( input ) & 0xff ) << 8 ) );
     }
 

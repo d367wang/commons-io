@@ -17,6 +17,7 @@
 package org.apache.commons.io.output;
 
 import java.io.OutputStream;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * A decorating output stream that counts the number of bytes that have passed
@@ -29,7 +30,7 @@ import java.io.OutputStream;
 public class CountingOutputStream extends ProxyOutputStream {
 
     /** The count of bytes that have passed. */
-    private long count = 0;
+    private @IntRange(from=0) long count = 0;
 
     /**
      * Constructs a new CountingOutputStream.
@@ -100,7 +101,7 @@ public class CountingOutputStream extends ProxyOutputStream {
      * @return the number of bytes accumulated
      * @since 1.3
      */
-    public synchronized long getByteCount() {
+    public synchronized @IntRange(from=0) long getByteCount() {
         return this.count;
     }
 
@@ -114,7 +115,7 @@ public class CountingOutputStream extends ProxyOutputStream {
      * @return the count previous to resetting
      * @since 1.3
      */
-    public synchronized long resetByteCount() {
+    public synchronized @IntRange(from=0) long resetByteCount() {
         final long tmp = this.count;
         this.count = 0;
         return tmp;

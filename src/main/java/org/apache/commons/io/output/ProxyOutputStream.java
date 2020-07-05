@@ -20,6 +20,8 @@ import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * A Proxy stream which acts as expected, that is it passes the method 
  * calls on to the proxied stream and doesn't change which methods are 
