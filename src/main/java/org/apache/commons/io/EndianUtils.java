@@ -55,7 +55,7 @@ public class EndianUtils {
      * @param value value to convert
      * @return the converted value
      */
-    public static @IntRange(from=0, to=65535) short swapShort(final short value) {
+    public static short swapShort(final short value) {
         return (short) ( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
             ( ( ( value >> 8 ) & 0xff ) << 0 ) );
     }
@@ -117,7 +117,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @param value value to write
      */
-    public static void writeSwappedShort(final byte[] data, final int offset, final short value) {
+    public static void writeSwappedShort(final @IntRange(from=0, to=255) byte[] data, final int offset, final short value) {
         data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
         data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
     }
@@ -142,7 +142,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @return the value read
      */
-    public static int readSwappedUnsignedShort(final byte[] data, final int offset) {
+    public static @IntRange(from=0, to=65535) int readSwappedUnsignedShort(final byte[] data, final int offset) {
         return ( ( ( data[ offset + 0 ] & 0xff ) << 0 ) +
             ( ( data[ offset + 1 ] & 0xff ) << 8 ) );
     }
@@ -154,7 +154,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @param value value to write
      */
-    public static void writeSwappedInteger(final byte[] data, final int offset, final int value) {
+    public static void writeSwappedInteger(final @IntRange(from=0, to=255) byte[] data, final int offset, final int value) {
         data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
         data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
         data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
@@ -200,7 +200,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @param value value to write
      */
-    public static void writeSwappedLong(final byte[] data, final int offset, final long value) {
+    public static void writeSwappedLong(final @IntRange(from=0, to=255) byte[] data, final int offset, final long value) {
         data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
         data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
         data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
@@ -231,7 +231,7 @@ public class EndianUtils {
      * @param offset starting offset in the byte array
      * @param value value to write
      */
-    public static void writeSwappedFloat(final byte[] data, final int offset, final float value) {
+    public static void writeSwappedFloat(final @IntRange(from=0, to=255) byte[] data, final int offset, final float value) {
         writeSwappedInteger( data, offset, Float.floatToIntBits( value ) );
     }
 
@@ -303,7 +303,7 @@ public class EndianUtils {
      * @return the value just read
      * @throws IOException in case of an I/O problem
      */
-    public static int readSwappedUnsignedShort(final InputStream input)
+    public static @IntRange(from=0, to=65535) int readSwappedUnsignedShort(final InputStream input)
         throws IOException
     {
         final int value1 = read( input );
@@ -404,7 +404,7 @@ public class EndianUtils {
     public static long readSwappedLong(final InputStream input)
         throws IOException
     {
-        final byte[] bytes = new byte[8];
+        final @IntRange(from=0, to=255) byte[] bytes = new byte[8];
         for ( int i=0; i<8; i++ ) {
             bytes[i] = (byte) read( input );
         }
@@ -469,7 +469,7 @@ public class EndianUtils {
      * @return the byte
      * @throws IOException if the end of file is reached
      */
-    private static int read(final InputStream input)
+    private static @IntRange(from=0, to=255) int read(final InputStream input)
         throws IOException
     {
         final int value = input.read();

@@ -50,7 +50,8 @@ import java.util.List;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.io.output.StringBuilderWriter;
 
-import org.checkerframework.checker.index.qual.NonNegative;
+import org.checkerframework.common.value.qual.IntRange;
+import org.checkerframework.common.value.qual.IntVal;
 
 /**
  * General IO stream manipulation utilities.
@@ -107,7 +108,7 @@ public class IOUtils {
      * Represents the end-of-file (or stream).
      * @since 2.5 (made public)
      */
-    public static final int EOF = -1;
+    public static final @IntVal(-1) int EOF = -1;
 
     /**
      * The Unix directory separator character.
@@ -786,7 +787,7 @@ public class IOUtils {
      * @see IOUtils#toByteArray(java.io.InputStream, int)
      * @since 2.1
      */
-    public static byte[] toByteArray(final InputStream input, @NonNegative final long size) throws IOException {
+    public static byte[] toByteArray(final InputStream input, final @IntRange(from=0) long size) throws IOException {
 
         if (size > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("Size cannot be greater than Integer max value: " + size);
@@ -2245,7 +2246,7 @@ public class IOUtils {
      * @since 1.1
      */
     public static int copy(final InputStream input, final OutputStream output) throws IOException {
-    	@NonNegative final long count = copyLarge(input, output);
+    	final long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
             return -1;
         }
@@ -2267,7 +2268,7 @@ public class IOUtils {
      * @throws IOException          if an I/O error occurs
      * @since 2.5
      */
-    public static long copy(final InputStream input, final OutputStream output, final int bufferSize)
+    public static @IntRange(from=0) long copy(final InputStream input, final OutputStream output, final int bufferSize)
             throws IOException {
         return copyLarge(input, output, new byte[bufferSize]);
     }
@@ -2288,7 +2289,7 @@ public class IOUtils {
      * @throws IOException          if an I/O error occurs
      * @since 1.3
      */
-    public static long copyLarge(final InputStream input, final OutputStream output)
+    public static @IntRange(from=0) long copyLarge(final InputStream input, final OutputStream output)
             throws IOException {
         return copy(input, output, DEFAULT_BUFFER_SIZE);
     }
@@ -2309,7 +2310,7 @@ public class IOUtils {
      * @throws IOException          if an I/O error occurs
      * @since 2.2
      */
-    public static long copyLarge(final InputStream input, final OutputStream output, final byte[] buffer)
+    public static @IntRange(from=0) long copyLarge(final InputStream input, final OutputStream output, final byte[] buffer)
             throws IOException {
         long count = 0;
         int n;
@@ -2492,7 +2493,7 @@ public class IOUtils {
      * @since 1.1
      */
     public static int copy(final Reader input, final Writer output) throws IOException {
-    	@NonNegative final long count = copyLarge(input, output);
+    	final long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
             return -1;
         }
@@ -2514,7 +2515,7 @@ public class IOUtils {
      * @throws IOException          if an I/O error occurs
      * @since 1.3
      */
-    public static long copyLarge(final Reader input, final Writer output) throws IOException {
+    public static @IntRange(from=0) long copyLarge(final Reader input, final Writer output) throws IOException {
         return copyLarge(input, output, new char[DEFAULT_BUFFER_SIZE]);
     }
 
@@ -2533,7 +2534,7 @@ public class IOUtils {
      * @throws IOException          if an I/O error occurs
      * @since 2.2
      */
-    public static long copyLarge(final Reader input, final Writer output, final char[] buffer) throws IOException {
+    public static @IntRange(from=0) long copyLarge(final Reader input, final Writer output, final char[] buffer) throws IOException {
         long count = 0;
         int n;
         while (EOF != (n = input.read(buffer))) {

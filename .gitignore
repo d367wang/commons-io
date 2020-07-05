@@ -12,3 +12,8 @@ site-content
 /.classpath
 /.project
 /.settings/
+/bin/
+
+/**/*.class
+/logs
+/dljc-out

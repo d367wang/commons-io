@@ -21,6 +21,8 @@ import static org.apache.commons.io.IOUtils.EOF;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * A decorating input stream that counts the number of bytes that have passed
  * through the stream so far.

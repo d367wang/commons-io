@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.EndianUtils;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * DataInput for systems relying on little endian data formats.
@@ -216,7 +217,7 @@ public class SwappedDataInputStream extends ProxyInputStream
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int readUnsignedByte()
+    public @IntRange(from=-1, to=255) int readUnsignedByte()
         throws IOException, EOFException
     {
         return in.read();
@@ -229,7 +230,7 @@ public class SwappedDataInputStream extends ProxyInputStream
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int readUnsignedShort()
+    public @IntRange(from=0, to=65535) int readUnsignedShort()
         throws IOException, EOFException
     {
         return EndianUtils.readSwappedUnsignedShort( in );

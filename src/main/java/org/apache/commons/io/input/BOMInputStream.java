@@ -95,7 +95,7 @@ public class BOMInputStream extends ProxyInputStream {
      */
     private final List<ByteOrderMark> boms;
     private ByteOrderMark byteOrderMark;
-    private @IntRange(from=-1, to=255) int[] firstBytes;
+    private @IntRange(from=0, to=255) int[] firstBytes;
     private int fbLength;
     private int fbIndex;
     private int markFbIndex;
