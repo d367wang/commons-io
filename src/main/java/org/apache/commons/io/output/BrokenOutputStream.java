@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * Broken output stream. This stream always throws an {@link IOException} from
  * all {@link OutputStream} methods.
@@ -58,7 +60,7 @@ public class BrokenOutputStream extends OutputStream {
      * @throws IOException always thrown
      */
     @Override
-    public void write(final int b) throws IOException {
+    public void write(final @IntRange(from=-128, to=255) int b) throws IOException {
         throw exception;
     }
 

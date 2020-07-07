@@ -19,6 +19,7 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * An output stream which triggers an event when a specified number of bytes of
@@ -86,7 +87,7 @@ public abstract class ThresholdingOutputStream
      * @throws IOException if an error occurs.
      */
     @Override
-    public void write(final int b) throws IOException
+    public void write(final @IntRange(from=-128, to=255) int b) throws IOException
     {
         checkThreshold(1);
         getStream().write(b);
@@ -122,7 +123,7 @@ public abstract class ThresholdingOutputStream
      * @throws IOException if an error occurs.
      */
     @Override
-    public void write(final byte b[], final int off, final int len) throws IOException
+    public void write(final byte b[], final @IntRange(from=0) int off, final @IntRange(from=0) int len) throws IOException
     {
         checkThreshold(len);
         getStream().write(b, off, len);

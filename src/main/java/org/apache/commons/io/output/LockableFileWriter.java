@@ -25,6 +25,7 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * FileWriter that will create and honor lock files to allow simple
@@ -299,7 +300,7 @@ public class LockableFileWriter extends Writer {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void write(final int idx) throws IOException {
+    public void write(final @IntRange(from=0, to=65535) int idx) throws IOException {
         out.write(idx);
     }
 

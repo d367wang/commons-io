@@ -3069,7 +3069,7 @@ public class IOUtils {
      * @throws IOException if a read error occurs
      * @since 2.2
      */
-    public static int read(final InputStream input, final byte[] buffer, final int offset, final int length)
+    public static int read(final InputStream input, final byte[] buffer, final @IntRange(from=0) int offset, final @IntRange(from=0) int length)
             throws IOException {
         if (length < 0) {
             throw new IllegalArgumentException("Length must not be negative: " + length);
@@ -3181,7 +3181,7 @@ public class IOUtils {
      * @throws EOFException             if the number of bytes read was incorrect
      * @since 2.2
      */
-    public static void readFully(final InputStream input, final byte[] buffer, final int offset, final int length)
+    public static void readFully(final InputStream input, final byte[] buffer, final @IntRange(from=0) int offset, final @IntRange(from=0) int length)
             throws IOException {
         final int actual = read(input, buffer, offset, length);
         if (actual != length) {

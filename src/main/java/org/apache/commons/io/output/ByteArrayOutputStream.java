@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.io.input.ClosedInputStream;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * This class implements an output stream in which the data is
@@ -63,13 +64,13 @@ public class ByteArrayOutputStream extends OutputStream {
     /** The list of buffers, which grows and never reduces. */
     private final List<byte[]> buffers = new ArrayList<>();
     /** The index of the current buffer. */
-    private int currentBufferIndex;
+    private @IntRange(from=0) int currentBufferIndex;
     /** The total count of bytes in all the filled buffers. */
-    private int filledBufferSum;
+    private @IntRange(from=0) int filledBufferSum;
     /** The current buffer. */
     private byte[] currentBuffer;
     /** The total count of bytes written. */
-    private int count;
+    private @IntRange(from=0) int count;
     /** Flag to indicate if the buffers can be reused after reset */
     private boolean reuseBuffers = true;
 
@@ -137,7 +138,7 @@ public class ByteArrayOutputStream extends OutputStream {
      * @param len The number of bytes to write
      */
     @Override
-    public void write(final byte[] b, final int off, final int len) {
+    public void write(final byte[] b, final @IntRange(from=0) int off, final @IntRange(from=0) int len) {
         if ((off < 0)
                 || (off > b.length)
                 || (len < 0)
@@ -169,7 +170,7 @@ public class ByteArrayOutputStream extends OutputStream {
      * @param b the byte to write
      */
     @Override
-    public synchronized void write(final int b) {
+    public synchronized void write(final @IntRange(from=-128, to=255) int b) {
         int inBufferPos = count - filledBufferSum;
         if (inBufferPos == currentBuffer.length) {
             needNewBuffer(count + 1);

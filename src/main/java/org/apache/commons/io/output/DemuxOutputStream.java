@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * Forwards data to a stream that has been associated with this thread.
  *
@@ -77,7 +79,7 @@ public class DemuxOutputStream extends OutputStream {
      *             if an error occurs
      */
     @Override
-    public void write(final int ch) throws IOException {
+    public void write(final @IntRange(from=-128, to=255) int ch) throws IOException {
         @SuppressWarnings("resource")
         final OutputStream output = outputStreamThreadLocal.get();
         if (null != output) {

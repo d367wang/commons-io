@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * Classic splitter of OutputStream. Named after the unix 'tee' 
  * command. It allows a stream to be branched off so there 
@@ -59,7 +61,7 @@ public class TeeOutputStream extends ProxyOutputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public synchronized void write(final byte[] b, final int off, final int len) throws IOException {
+    public synchronized void write(final byte[] b, final @IntRange(from=0) int off, final @IntRange(from=0) int len) throws IOException {
         super.write(b, off, len);
         this.branch.write(b, off, len);
     }
@@ -70,7 +72,7 @@ public class TeeOutputStream extends ProxyOutputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public synchronized void write(final int b) throws IOException {
+    public synchronized void write(final @IntRange(from=-128, to=255) int b) throws IOException {
         super.write(b);
         this.branch.write(b);
     }

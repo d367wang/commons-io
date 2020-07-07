@@ -26,6 +26,8 @@ import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * {@link OutputStream} implementation that transforms a byte stream to a
  * character stream using a specified charset encoding and writes the resulting
@@ -243,7 +245,7 @@ public class WriterOutputStream extends OutputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void write(final int b) throws IOException {
+    public void write(final @IntRange(from=-128, to=255) int b) throws IOException {
         write(new byte[] { (byte)b }, 0, 1);
     }
 

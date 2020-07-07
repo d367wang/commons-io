@@ -209,7 +209,7 @@ public class NullInputStream extends InputStream {
      * @throws IOException if trying to read past the end of file.
      */
     @Override
-    public int read(final byte[] bytes) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] bytes) throws IOException {
         return read(bytes, 0, bytes.length);
     }
 
@@ -227,7 +227,7 @@ public class NullInputStream extends InputStream {
      * @throws IOException if trying to read past the end of file.
      */
     @Override
-    public int read(final byte[] bytes, final int offset, final int length) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] bytes, final @IntRange(from=0) int offset, final @IntRange(from=0) int length) throws IOException {
         if (eof) {
             throw new IOException("Read after end of file");
         }

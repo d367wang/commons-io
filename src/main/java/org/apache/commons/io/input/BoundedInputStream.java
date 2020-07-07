@@ -101,7 +101,7 @@ public class BoundedInputStream extends InputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int read(final byte[] b) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] b) throws IOException {
         return this.read(b, 0, b.length);
     }
 
@@ -115,7 +115,7 @@ public class BoundedInputStream extends InputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public int read(final byte[] b, final int off, final int len) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] b, final @IntRange(from=0) int off, final @IntRange(from=0) int len) throws IOException {
         if (max>=0 && pos>=max) {
             return EOF;
         }

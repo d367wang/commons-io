@@ -20,7 +20,7 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.checkerframework.common.value.qual.UnknownVal;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * A Proxy stream which acts as expected, that is it passes the method 
@@ -51,7 +51,7 @@ public class ProxyWriter extends FilterWriter {
      * @since 2.0
      */
     @Override
-    public Writer append(final @UnknownVal char c) throws IOException {
+    public Writer append(final char c) throws IOException {
         try {
             beforeWrite(1);
             out.append(c);
@@ -113,7 +113,7 @@ public class ProxyWriter extends FilterWriter {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void write(final int idx) throws IOException {
+    public void write(final @IntRange(from=0, to=65535) int idx) throws IOException {
         try {
             beforeWrite(1);
             out.write(idx);

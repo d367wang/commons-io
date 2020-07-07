@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.ByteOrderMark;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * Character stream that handles all the necessary Voodoo to figure out the

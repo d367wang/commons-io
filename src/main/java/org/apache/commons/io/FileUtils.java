@@ -51,6 +51,7 @@ import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.output.NullOutputStream;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * General file manipulation utilities.
@@ -2198,7 +2199,7 @@ public class FileUtils {
      * @throws IOException in case of an I/O error
      * @since 2.5
      */
-    public static void writeByteArrayToFile(final File file, final byte[] data, final int off, final int len)
+    public static void writeByteArrayToFile(final File file, final byte[] data, final @IntRange(from=0) int off, final @IntRange(from=0) int len)
             throws IOException {
         writeByteArrayToFile(file, data, off, len, false);
     }
@@ -2217,7 +2218,7 @@ public class FileUtils {
      * @throws IOException in case of an I/O error
      * @since 2.5
      */
-    public static void writeByteArrayToFile(final File file, final byte[] data, final int off, final int len,
+    public static void writeByteArrayToFile(final File file, final byte[] data, final @IntRange(from=0) int off, final @IntRange(from=0) int len,
                                             final boolean append) throws IOException {
         try (OutputStream out = openOutputStream(file, append)) {
             out.write(data, off, len);

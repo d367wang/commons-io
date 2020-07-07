@@ -26,6 +26,7 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.Charsets;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * Reads lines in a file reversely (similar to a BufferedReader, but starting at
@@ -127,7 +128,7 @@ public class ReversedLinesFileReader implements Closeable {
         }
 
         // NOTE: The new line sequences are matched in the order given, so it is important that \r\n is BEFORE \n
-        newLineSequences = new byte[][] { "\r\n".getBytes(encoding), "\n".getBytes(encoding), "\r".getBytes(encoding) };
+        newLineSequences = new @IntRange(from=-128, to=127) byte[][] { "\r\n".getBytes(encoding), "\n".getBytes(encoding), "\r".getBytes(encoding) };
 
         avoidNewlineSplitBufferSize = newLineSequences[0].length;
 

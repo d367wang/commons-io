@@ -335,7 +335,7 @@ public class BOMInputStream extends ProxyInputStream {
      *             if an I/O error occurs
      */
     @Override
-    public int read(final byte[] buf, int off, int len) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] buf, @IntRange(from=0) int off, @IntRange(from=0) int len) throws IOException {
         int firstCount = 0;
         int b = 0;
         while (len > 0 && b >= 0) {
@@ -360,7 +360,7 @@ public class BOMInputStream extends ProxyInputStream {
      *             if an I/O error occurs
      */
     @Override
-    public int read(final byte[] buf) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] buf) throws IOException {
         return read(buf, 0, buf.length);
     }
 

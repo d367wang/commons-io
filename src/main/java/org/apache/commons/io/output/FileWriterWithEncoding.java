@@ -26,6 +26,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
 import org.apache.commons.io.FileUtils;
+import org.checkerframework.common.value.qual.IntRange;
 
 /**
  * Writer of files that allows the encoding to be set.
@@ -262,7 +263,7 @@ public class FileWriterWithEncoding extends Writer {
      * @throws IOException if an I/O error occurs
      */
      @Override
-    public void write(final int idx) throws IOException {
+    public void write(final @IntRange(from=0, to=65535) int idx) throws IOException {
         out.write(idx);
     }
 

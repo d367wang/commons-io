@@ -129,7 +129,7 @@ public class CharSequenceInputStream extends InputStream {
     }
 
     @Override
-    public int read(final byte[] b, int off, int len) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] b, @IntRange(from=0) int off, @IntRange(from=0) int len) throws IOException {
         if (b == null) {
             throw new NullPointerException("Byte array is null");
         }
@@ -175,7 +175,7 @@ public class CharSequenceInputStream extends InputStream {
     }
 
     @Override
-    public int read(final byte[] b) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] b) throws IOException {
         return read(b, 0, b.length);
     }
 

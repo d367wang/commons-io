@@ -20,6 +20,8 @@ import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * OutputStream which breaks larger output blocks into chunks.
  * Native code may need to copy the input array; if the write buffer

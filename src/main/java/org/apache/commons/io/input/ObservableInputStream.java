@@ -131,7 +131,7 @@ public class ObservableInputStream extends ProxyInputStream {
     }
 
     @Override
-    public int read(byte[] pBuffer) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(byte[] pBuffer) throws IOException {
         int result = 0;
         IOException ioe = null;
         try {
@@ -150,7 +150,7 @@ public class ObservableInputStream extends ProxyInputStream {
     }
 
     @Override
-    public int read(byte[] pBuffer, int pOffset, int pLength) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(byte[] pBuffer, @IntRange(from=0) int pOffset, @IntRange(from=0) int pLength) throws IOException {
         int result = 0;
         IOException ioe = null;
         try {

@@ -126,7 +126,7 @@ public class TeeInputStream extends ProxyInputStream {
      * @throws IOException if the stream could not be read (or written) 
      */
     @Override
-    public int read(final byte[] bts, final int st, final int end) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] bts, final @IntRange(from=0) int st, final @IntRange(from=0) int end) throws IOException {
         final int n = super.read(bts, st, end);
         if (n != -1) {
             branch.write(bts, st, n);
@@ -143,7 +143,7 @@ public class TeeInputStream extends ProxyInputStream {
      * @throws IOException if the stream could not be read (or written) 
      */
     @Override
-    public int read(final byte[] bts) throws IOException {
+    public @IntRange(from=-1, to=2147483647) int read(final byte[] bts) throws IOException {
         final int n = super.read(bts);
         if (n != EOF) {
             branch.write(bts, 0, n);

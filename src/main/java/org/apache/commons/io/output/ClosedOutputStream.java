@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * Closed output stream. This stream throws an exception on all attempts to
  * write something to the stream.
@@ -43,7 +45,7 @@ public class ClosedOutputStream extends OutputStream {
      * @throws IOException always thrown
      */
     @Override
-    public void write(final int b) throws IOException {
+    public void write(final @IntRange(from=-128, to=255) int b) throws IOException {
         throw new IOException("write(" + b + ") failed: stream is closed");
     }
 

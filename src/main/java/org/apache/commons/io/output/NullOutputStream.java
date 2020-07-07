@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * This OutputStream writes all data to the famous <b>/dev/null</b>.
  * <p>
@@ -50,7 +52,7 @@ public class NullOutputStream extends OutputStream {
      * @param b The byte to write
      */
     @Override
-    public void write(final int b) {
+    public void write(final @IntRange(from=-128, to=255) int b) {
         //to /dev/null
     }
 

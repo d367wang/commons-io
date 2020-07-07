@@ -50,7 +50,7 @@ public class ProxyOutputStream extends FilterOutputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void write(final int idx) throws IOException {
+    public void write(final @IntRange(from=-128, to=255) int idx) throws IOException {
         try {
             beforeWrite(1);
             out.write(idx);
@@ -85,7 +85,7 @@ public class ProxyOutputStream extends FilterOutputStream {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    public void write(final byte[] bts, final int st, final int end) throws IOException {
+    public void write(final byte[] bts, final @IntRange(from=0) int st, final @IntRange(from=0) int end) throws IOException {
         try {
             beforeWrite(end);
             out.write(bts, st, end);

@@ -19,6 +19,8 @@ package org.apache.commons.io.output;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.checkerframework.common.value.qual.IntRange;
+
 /**
  * OutputStream implementation that writes the data to an {@link Appendable}
  * Object.
@@ -50,7 +52,7 @@ public class AppendableOutputStream <T extends Appendable> extends OutputStream 
      * @throws IOException upon error
      */
     @Override
-    public void write(int b) throws IOException {
+    public void write(@IntRange(from=-128, to=255) int b) throws IOException {
         appendable.append((char)b);
     }
 
