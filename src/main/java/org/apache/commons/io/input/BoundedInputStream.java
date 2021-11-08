@@ -101,7 +101,8 @@ public class BoundedInputStream extends InputStream {
      */
     @Override
     public int read(final byte[] b) throws IOException {
-        return this.read(b, 0, b.length);
+//        return this.read(b, 0, b.length);
+        return this.read(b, 0, 0);
     }
 
     /**
@@ -118,7 +119,7 @@ public class BoundedInputStream extends InputStream {
         if (max>=0 && pos>=max) {
             return EOF;
         }
-        final long maxRead = max>=0 ? Math.min(len, max-pos) : len;
+        final long maxRead = /*max>=0 ? Math.min(len, max-pos) : */len;
         final int bytesRead = in.read(b, off, (int)maxRead);
 
         if (bytesRead==EOF) {

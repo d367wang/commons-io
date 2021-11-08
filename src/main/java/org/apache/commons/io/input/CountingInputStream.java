@@ -57,7 +57,9 @@ public class CountingInputStream extends ProxyInputStream {
     @Override
     public synchronized long skip(final long length) throws IOException {
         final long skip = super.skip(length);
-        this.count += skip;
+        if (skip > 0) {
+            this.count += skip;
+        }
         return skip;
     }
 
@@ -69,8 +71,8 @@ public class CountingInputStream extends ProxyInputStream {
      */
     @Override
     protected synchronized void afterRead(final int n) {
-        if (n != EOF) {
-            this.count += n;
+        if (n > EOF) {
+            this.count += n;    // In ProxyOutputStream.write, negative input len is passed in this method
         }
     }
 

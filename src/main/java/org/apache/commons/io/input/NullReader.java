@@ -191,7 +191,8 @@ public class NullReader extends Reader {
      */
     @Override
     public int read(final char[] chars) throws IOException {
-        return read(chars, 0, chars.length);
+//        return read(chars, 0, chars.length);
+        return read(chars, 0, 0);
     }
 
     /**
@@ -218,7 +219,7 @@ public class NullReader extends Reader {
         position += length;
         int returnLength = length;
         if (position > size) {
-            returnLength = length - (int)(position - size);
+//            returnLength = length - (int)(position - size);
             position = size;
         }
         processChars(chars, offset, returnLength);

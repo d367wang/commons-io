@@ -50,7 +50,9 @@ public class CountingOutputStream extends ProxyOutputStream {
      */
     @Override
     protected synchronized void beforeWrite(final int n) {
-        count += n;
+        if (n >= 0) {
+            count += n; // In ProxyOutputStream.write, negative input len is passed in this method
+        }
     }
 
     //-----------------------------------------------------------------------

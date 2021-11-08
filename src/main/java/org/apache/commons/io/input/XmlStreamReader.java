@@ -714,7 +714,7 @@ public class XmlStreamReader extends Reader {
             String xmlProlog = ""; // avoid possible NPE warning (cannot happen; this just silences the warning)
             while (c != -1 && firstGT == -1 && offset < BUFFER_SIZE) {
                 offset += c;
-                max -= c;
+//                max -= c;
                 c = is.read(bytes, offset, max);
                 xmlProlog = new String(bytes, 0, offset, guessedEnc);
                 firstGT = xmlProlog.indexOf('>');

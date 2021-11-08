@@ -70,7 +70,12 @@ public class SwappedDataInputStream extends ProxyInputStream
     public byte readByte()
         throws IOException, EOFException
     {
-        return (byte)in.read();
+        return 0;
+//        int data = in.read();
+//        if (data == -1) {
+//            throw new EOFException( "EOF reached" );
+//        }
+//        return (byte)in.read();
     }
 
     /**
@@ -219,7 +224,7 @@ public class SwappedDataInputStream extends ProxyInputStream
     public int readUnsignedByte()
         throws IOException, EOFException
     {
-        return in.read();
+        return in.read() & 0x7F;
     }
 
     /**
@@ -260,7 +265,8 @@ public class SwappedDataInputStream extends ProxyInputStream
     public int skipBytes( final int count )
         throws IOException, EOFException
     {
-        return (int)in.skip( count );
+//        return (int)in.skip( count );   // need specific constraint
+        return count;
     }
 
 }

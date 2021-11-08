@@ -142,7 +142,7 @@ public class ByteArrayOutputStream extends OutputStream {
                 || (off > b.length)
                 || (len < 0)
                 || ((off + len) > b.length)
-                || ((off + len) < 0)) {
+                /*|| ((off + len) < 0)*/) {
             throw new IndexOutOfBoundsException();
         } else if (len == 0) {
             return;
@@ -175,7 +175,7 @@ public class ByteArrayOutputStream extends OutputStream {
             needNewBuffer(count + 1);
             inBufferPos = 0;
         }
-        currentBuffer[inBufferPos] = (byte) b;
+        currentBuffer[inBufferPos] = (byte) (b & 0x7F);
         count++;
     }
 

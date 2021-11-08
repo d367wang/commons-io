@@ -85,7 +85,7 @@ public class ProxyOutputStream extends FilterOutputStream {
     @Override
     public void write(final byte[] bts, final int st, final int end) throws IOException {
         try {
-            beforeWrite(end);
+            beforeWrite(end); // end is possibly negative, may cause subclass CountingOutputStream.count to be negative
             out.write(bts, st, end);
             afterWrite(end);
         } catch (final IOException e) {

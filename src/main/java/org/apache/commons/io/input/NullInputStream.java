@@ -208,7 +208,8 @@ public class NullInputStream extends InputStream {
      */
     @Override
     public int read(final byte[] bytes) throws IOException {
-        return read(bytes, 0, bytes.length);
+//        return read(bytes, 0, bytes.length);
+        return read(bytes, 0, 0);
     }
 
     /**
@@ -231,6 +232,9 @@ public class NullInputStream extends InputStream {
         }
         if (position == size) {
             return doEndOfFile();
+        }
+        if (length <= 0) {
+            return 0;
         }
         position += length;
         int returnLength = length;

@@ -2870,11 +2870,11 @@ public class IOUtils {
         if (toSkip < 0) {
             throw new IllegalArgumentException("Skip count must be non-negative, actual: " + toSkip);
         }
-        final ByteBuffer skipByteBuffer = ByteBuffer.allocate((int) Math.min(toSkip, SKIP_BUFFER_SIZE));
+        final ByteBuffer skipByteBuffer = ByteBuffer.allocate((int) Math.min(toSkip & 0xFFFF, SKIP_BUFFER_SIZE));
         long remain = toSkip;
         while (remain > 0) {
             skipByteBuffer.position(0);
-            skipByteBuffer.limit((int) Math.min(remain, SKIP_BUFFER_SIZE));
+//            skipByteBuffer.limit((int) Math.min(remain, SKIP_BUFFER_SIZE));
             final int n = input.read(skipByteBuffer);
             if (n == EOF) {
                 break;

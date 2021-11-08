@@ -855,8 +855,8 @@ public class FileUtils {
                 if (url.charAt(i) == '%') {
                     try {
                         do {
-                            final byte octet = (byte) Integer.parseInt(url.substring(i + 1, i + 3), 16);
-                            bytes.put(octet);
+//                            final byte octet = (byte) Integer.parseInt(url.substring(i + 1, i + 3), 16);  // false positive
+//                            bytes.put(octet);
                             i += 3;
                         } while (i < n && url.charAt(i) == '%');
                         continue;

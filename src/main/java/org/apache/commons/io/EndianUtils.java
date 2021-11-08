@@ -54,8 +54,8 @@ public class EndianUtils {
      * @return the converted value
      */
     public static short swapShort(final short value) {
-        return (short) ( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
-            ( ( ( value >> 8 ) & 0xff ) << 0 ) );
+        return (short) (( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
+            ( ( ( value >> 8 ) & 0xff ) << 0 ) ) & 0x7FFF);
     }
 
     /**
@@ -116,8 +116,8 @@ public class EndianUtils {
      * @param value value to write
      */
     public static void writeSwappedShort(final byte[] data, final int offset, final short value) {
-        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
-        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
+//        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
+//        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
     }
 
     /**
@@ -128,8 +128,8 @@ public class EndianUtils {
      * @return the value read
      */
     public static short readSwappedShort(final byte[] data, final int offset) {
-        return (short)( ( ( data[ offset + 0 ] & 0xff ) << 0 ) +
-            ( ( data[ offset + 1 ] & 0xff ) << 8 ) );
+        return (short)( (( ( data[ offset + 0 ] & 0xff ) << 0 ) +
+            ( ( data[ offset + 1 ] & 0xff ) << 8 )) & 0x7FFF);
     }
 
     /**
@@ -153,10 +153,10 @@ public class EndianUtils {
      * @param value value to write
      */
     public static void writeSwappedInteger(final byte[] data, final int offset, final int value) {
-        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
-        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
-        data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
-        data[ offset + 3 ] = (byte)( ( value >> 24 ) & 0xff );
+//        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
+//        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
+//        data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
+//        data[ offset + 3 ] = (byte)( ( value >> 24 ) & 0xff );
     }
 
     /**
@@ -199,14 +199,14 @@ public class EndianUtils {
      * @param value value to write
      */
     public static void writeSwappedLong(final byte[] data, final int offset, final long value) {
-        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
-        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
-        data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
-        data[ offset + 3 ] = (byte)( ( value >> 24 ) & 0xff );
-        data[ offset + 4 ] = (byte)( ( value >> 32 ) & 0xff );
-        data[ offset + 5 ] = (byte)( ( value >> 40 ) & 0xff );
-        data[ offset + 6 ] = (byte)( ( value >> 48 ) & 0xff );
-        data[ offset + 7 ] = (byte)( ( value >> 56 ) & 0xff );
+//        data[ offset + 0 ] = (byte)( ( value >> 0 ) & 0xff );
+//        data[ offset + 1 ] = (byte)( ( value >> 8 ) & 0xff );
+//        data[ offset + 2 ] = (byte)( ( value >> 16 ) & 0xff );
+//        data[ offset + 3 ] = (byte)( ( value >> 24 ) & 0xff );
+//        data[ offset + 4 ] = (byte)( ( value >> 32 ) & 0xff );
+//        data[ offset + 5 ] = (byte)( ( value >> 40 ) & 0xff );
+//        data[ offset + 6 ] = (byte)( ( value >> 48 ) & 0xff );
+//        data[ offset + 7 ] = (byte)( ( value >> 56 ) & 0xff );
     }
 
     /**
@@ -276,8 +276,8 @@ public class EndianUtils {
     public static void writeSwappedShort(final OutputStream output, final short value)
         throws IOException
     {
-        output.write( (byte)( ( value >> 0 ) & 0xff ) );
-        output.write( (byte)( ( value >> 8 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 0 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 8 ) & 0xff ) );
     }
 
     /**
@@ -290,8 +290,8 @@ public class EndianUtils {
     public static short readSwappedShort(final InputStream input)
         throws IOException
     {
-        return (short)( ( ( read( input ) & 0xff ) << 0 ) +
-            ( ( read( input ) & 0xff ) << 8 ) );
+        return (short)(( ( ( read( input ) & 0xff ) << 0 ) +
+            ( ( read( input ) & 0xff ) << 8 )) & 0x7FFF );
     }
 
     /**
@@ -308,7 +308,7 @@ public class EndianUtils {
         final int value2 = read( input );
 
         return ( ( ( value1 & 0xff ) << 0 ) +
-            ( ( value2 & 0xff ) << 8 ) );
+            ( ( value2 & 0xff ) << 8 ) ) & 0x7FFF;
     }
 
     /**
@@ -321,10 +321,10 @@ public class EndianUtils {
     public static void writeSwappedInteger(final OutputStream output, final int value)
         throws IOException
     {
-        output.write( (byte)( ( value >> 0 ) & 0xff ) );
-        output.write( (byte)( ( value >> 8 ) & 0xff ) );
-        output.write( (byte)( ( value >> 16 ) & 0xff ) );
-        output.write( (byte)( ( value >> 24 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 0 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 8 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 16 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 24 ) & 0xff ) );
     }
 
     /**
@@ -382,14 +382,14 @@ public class EndianUtils {
     public static void writeSwappedLong(final OutputStream output, final long value)
         throws IOException
     {
-        output.write( (byte)( ( value >> 0 ) & 0xff ) );
-        output.write( (byte)( ( value >> 8 ) & 0xff ) );
-        output.write( (byte)( ( value >> 16 ) & 0xff ) );
-        output.write( (byte)( ( value >> 24 ) & 0xff ) );
-        output.write( (byte)( ( value >> 32 ) & 0xff ) );
-        output.write( (byte)( ( value >> 40 ) & 0xff ) );
-        output.write( (byte)( ( value >> 48 ) & 0xff ) );
-        output.write( (byte)( ( value >> 56 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 0 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 8 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 16 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 24 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 32 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 40 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 48 ) & 0xff ) );
+//        output.write( (byte)( ( value >> 56 ) & 0xff ) );
     }
 
     /**
@@ -404,7 +404,7 @@ public class EndianUtils {
     {
         final byte[] bytes = new byte[8];
         for ( int i=0; i<8; i++ ) {
-            bytes[i] = (byte) read( input );
+            bytes[i] = (byte) (read( input ) & 0x7F);
         }
         return readSwappedLong( bytes, 0 );
     }
