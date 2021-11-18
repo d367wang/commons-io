@@ -70,12 +70,11 @@ public class SwappedDataInputStream extends ProxyInputStream
     public byte readByte()
         throws IOException, EOFException
     {
-        return 0;
-//        int data = in.read();
-//        if (data == -1) {
-//            throw new EOFException( "EOF reached" );
-//        }
-//        return (byte)in.read();
+        int data = in.read();
+        if (data == -1) {
+            throw new EOFException( "EOF reached" );
+        }
+        return (byte) data;
     }
 
     /**
@@ -224,7 +223,7 @@ public class SwappedDataInputStream extends ProxyInputStream
     public int readUnsignedByte()
         throws IOException, EOFException
     {
-        return in.read() & 0x7F;
+        return in.read() & 0xFF;
     }
 
     /**

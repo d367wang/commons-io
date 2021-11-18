@@ -339,8 +339,7 @@ public class BOMInputStream extends ProxyInputStream {
         while (len > 0 && b >= 0) {
             b = readFirstBytes();
             if (b >= 0) {
-//                buf[off++] = (byte) (b & 0xFF);
-                buf[off++] = (byte) (b & 0x7F);
+                buf[off++] = (byte) (b & 0xFF);
                 len--;
                 firstCount++;
             }

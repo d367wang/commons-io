@@ -47,7 +47,7 @@ public class MessageDigestCalculatingInputStream extends ObservableInputStream {
 
         @Override
         void data(int pByte) throws IOException {
-            md.update((byte) (pByte & 0x7F));
+            md.update((byte) (pByte & 0xFF));
         }
 
         @Override
