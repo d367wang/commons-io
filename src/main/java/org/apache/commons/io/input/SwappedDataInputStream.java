@@ -74,7 +74,8 @@ public class SwappedDataInputStream extends ProxyInputStream
         if (data == -1) {
             throw new EOFException( "EOF reached" );
         }
-        return (byte) data;
+//        return (byte) data; // consider: (1) (@IntRange(from=-128,to=127) byte) data (2) @PolySigined for stub file
+        return (byte) (data & 0x7F);
     }
 
     /**
@@ -223,7 +224,7 @@ public class SwappedDataInputStream extends ProxyInputStream
     public int readUnsignedByte()
         throws IOException, EOFException
     {
-        return in.read() & 0xFF;
+        return in.read();
     }
 
     /**
