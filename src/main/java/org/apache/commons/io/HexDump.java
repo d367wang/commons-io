@@ -140,7 +140,7 @@ public class HexDump {
     private static StringBuilder dump(final StringBuilder _lbuffer, final long value) {
         for (int j = 0; j < 8; j++) {
 //            _lbuffer
-//                    .append(_hexcodes[(int) (value >> _shifts[j]) & 15]);
+//                    .append(_hexcodes[(int) (value >> _shifts[j]) & 15]); // bit manipulation, FINE!
         }
         return _lbuffer;
     }

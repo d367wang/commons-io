@@ -71,8 +71,8 @@ public class CountingInputStream extends ProxyInputStream {
      */
     @Override
     protected synchronized void afterRead(final int n) {
-        if (n > EOF) {
-            this.count += n;    // In ProxyOutputStream.write, negative input len is passed in this method
+        if (n != EOF) {
+            this.count += n;
         }
     }
 

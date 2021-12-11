@@ -70,12 +70,12 @@ public class SwappedDataInputStream extends ProxyInputStream
     public byte readByte()
         throws IOException, EOFException
     {
+//        return (byte) data; // unsafe narrowing
         int data = in.read();
         if (data == -1) {
             throw new EOFException( "EOF reached" );
         }
-//        return (byte) data; // consider: (1) (@IntRange(from=-128,to=127) byte) data (2) @PolySigined for stub file
-        return (byte) (data & 0x7F);
+        return (byte) (data & 0x7F); // workaround => consider: (1) (@IntRange(from=-128,to=127) byte) data (2) @PolySigined for stub file
     }
 
     /**
@@ -211,7 +211,7 @@ public class SwappedDataInputStream extends ProxyInputStream
     public short readShort()
         throws IOException, EOFException
     {
-        return EndianUtils.readSwappedShort( in );
+        return (short) (EndianUtils.readSwappedShort( in ) & 0x7FFF);
     }
 
     /**
@@ -265,7 +265,7 @@ public class SwappedDataInputStream extends ProxyInputStream
     public int skipBytes( final int count )
         throws IOException, EOFException
     {
-//        return (int)in.skip( count );   // need specific constraint
+//        return (int)in.skip( count );   // false positive: need specific constraint
         return count;
     }
 

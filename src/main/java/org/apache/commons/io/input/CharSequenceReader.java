@@ -146,7 +146,7 @@ public class CharSequenceReader extends Reader implements Serializable {
         if (idx >= charSequence.length()) {
             return EOF;
         }
-        final int dest = (int)Math.min(charSequence.length(), idx /*+ n*/);
+        final int dest = (int)Math.min(charSequence.length(), idx /*+ n*/);     // false positive
         final int count = dest - idx;
         idx = dest;
         return count;

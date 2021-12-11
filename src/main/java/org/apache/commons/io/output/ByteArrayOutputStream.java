@@ -175,7 +175,7 @@ public class ByteArrayOutputStream extends OutputStream {
             needNewBuffer(count + 1);
             inBufferPos = 0;
         }
-        currentBuffer[inBufferPos] = (byte) (b & 0xFF);
+        currentBuffer[inBufferPos] = (byte) b;
         count++;
     }
 

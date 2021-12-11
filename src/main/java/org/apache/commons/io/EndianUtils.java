@@ -54,8 +54,8 @@ public class EndianUtils {
      * @return the converted value
      */
     public static short swapShort(final short value) {
-        return (short) (( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
-            ( ( ( value >> 8 ) & 0xff ) << 0 ) ) & 0x7FFF);
+        return (short) ( ( ( ( value >> 0 ) & 0xff ) << 8 ) +
+            ( ( ( value >> 8 ) & 0xff ) << 0 ) );
     }
 
     /**
@@ -404,7 +404,7 @@ public class EndianUtils {
     {
         final byte[] bytes = new byte[8];
         for ( int i=0; i<8; i++ ) {
-            bytes[i] = (byte) (read( input ) & 0x7F);
+            bytes[i] = (byte) read( input );
         }
         return readSwappedLong( bytes, 0 );
     }
